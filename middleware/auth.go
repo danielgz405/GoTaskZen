@@ -4,35 +4,23 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/JuanCManchegoH/goprisma/models"
-	"github.com/JuanCManchegoH/goprisma/repository"
-	"github.com/JuanCManchegoH/goprisma/responses"
-	"github.com/JuanCManchegoH/goprisma/server"
+	"github.com/danielgz405/GoTaskZen/models"
+	"github.com/danielgz405/GoTaskZen/repository"
+	"github.com/danielgz405/GoTaskZen/responses"
+	"github.com/danielgz405/GoTaskZen/server"
 	"github.com/golang-jwt/jwt"
-	"github.com/gorilla/mux"
 )
 
 var (
 	NO_AUTH_NEEDED = []string{
 		"/welcome",
 		"login",
-	}
-	AUTH_BY_PARAMS = []string{
-		"ws",
+		"signup",
 	}
 )
 
 func shouldCheckAuth(route string) bool {
 	for _, p := range NO_AUTH_NEEDED {
-		if strings.Contains(route, p) {
-			return false
-		}
-	}
-	return true
-}
-
-func authByParams(route string) bool {
-	for _, p := range AUTH_BY_PARAMS {
 		if strings.Contains(route, p) {
 			return false
 		}
@@ -48,10 +36,6 @@ func CheckAuthMiddleware(s server.Server) func(h http.Handler) http.Handler {
 				return
 			}
 			tokenString := strings.TrimSpace(r.Header.Get("Authorization"))
-			if !authByParams(r.URL.Path) {
-				params := mux.Vars(r)
-				tokenString = strings.TrimSpace(params["Authorization"])
-			}
 			_, err := jwt.ParseWithClaims(tokenString, &models.AppClaims{}, func(token *jwt.Token) (interface{}, error) {
 				return []byte(s.Config().JWTSecret), nil
 			})

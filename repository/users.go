@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 
-	"github.com/JuanCManchegoH/goprisma/models"
+	"github.com/danielgz405/GoTaskZen/models"
 )
 
 func InsertUser(ctx context.Context, user *models.InsertUser) (*models.Profile, error) {

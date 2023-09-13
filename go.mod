@@ -1,4 +1,4 @@
-module github.com/JuanCManchegoH/goprisma
+module github.com/danielgz405/GoTaskZen
 
 go 1.19
 

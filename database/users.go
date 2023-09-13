@@ -3,13 +3,13 @@ package database
 import (
 	"context"
 
-	"github.com/JuanCManchegoH/goprisma/models"
+	"github.com/danielgz405/GoTaskZen/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func (repo *MongoRepo) InsertUser(ctx context.Context, user *models.InsertUser) (profile *models.Profile, err error) {
-	collection := repo.client.Database("GoPrisma").Collection("users")
+	collection := repo.client.Database("GoTaskZen").Collection("users")
 	result, err := collection.InsertOne(ctx, user)
 	if err != nil {
 		return nil, err
@@ -22,7 +22,7 @@ func (repo *MongoRepo) InsertUser(ctx context.Context, user *models.InsertUser) 
 	return profile, nil
 }
 func (repo *MongoRepo) GetUserById(ctx context.Context, id string) (*models.Profile, error) {
-	collection := repo.client.Database("GoPrisma").Collection("users")
+	collection := repo.client.Database("GoTaskZen").Collection("users")
 	var user models.User
 	oid, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
@@ -44,7 +44,7 @@ func (repo *MongoRepo) GetUserById(ctx context.Context, id string) (*models.Prof
 	return &profile, nil
 }
 func (repo *MongoRepo) GetUserByEmail(ctx context.Context, email string) (*models.User, error) {
-	collection := repo.client.Database("GoPrisma").Collection("users")
+	collection := repo.client.Database("GoTaskZen").Collection("users")
 	var user models.User
 	err := collection.FindOne(ctx, bson.M{"email": email}).Decode(&user)
 	if err != nil {
@@ -53,7 +53,7 @@ func (repo *MongoRepo) GetUserByEmail(ctx context.Context, email string) (*model
 	return &user, nil
 }
 func (repo *MongoRepo) UpdateUser(ctx context.Context, data models.UpdateUser) (*models.Profile, error) {
-	collection := repo.client.Database("GoPrisma").Collection("users")
+	collection := repo.client.Database("GoTaskZen").Collection("users")
 	oid, err := primitive.ObjectIDFromHex(data.Id)
 	if err != nil {
 		return nil, err
@@ -83,7 +83,7 @@ func (repo *MongoRepo) UpdateUser(ctx context.Context, data models.UpdateUser) (
 	return profile, nil
 }
 func (repo *MongoRepo) DeleteUser(ctx context.Context, id string) error {
-	collection := repo.client.Database("GoPrisma").Collection("users")
+	collection := repo.client.Database("GoTaskZen").Collection("users")
 	oid, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		return err

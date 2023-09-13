@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/JuanCManchegoH/goprisma/server"
+	"github.com/danielgz405/GoTaskZen/server"
 )
 
 type HomeResponse struct {

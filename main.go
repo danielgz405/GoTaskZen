@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/JuanCManchegoH/goprisma/handlers"
-	"github.com/JuanCManchegoH/goprisma/middleware"
-	"github.com/JuanCManchegoH/goprisma/server"
+	"github.com/danielgz405/GoTaskZen/handlers"
+	"github.com/danielgz405/GoTaskZen/middleware"
+	"github.com/danielgz405/GoTaskZen/server"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
@@ -47,4 +47,11 @@ func BindRoutes(s server.Server, r *mux.Router) {
 	r.HandleFunc("/profile", handlers.ProfileHandler(s)).Methods(http.MethodGet)
 	r.HandleFunc("/user/update/{id}", handlers.UpdateUserHandler(s)).Methods(http.MethodPatch)
 	r.HandleFunc("/user/delete/{id}", handlers.DeleteUserHandler(s)).Methods(http.MethodDelete)
+
+	// Board routes
+	r.HandleFunc("/board", handlers.InsertBoardHandler(s)).Methods(http.MethodPost)
+	r.HandleFunc("/board/one/{id}", handlers.GetBoardByIdHandler(s)).Methods(http.MethodGet)
+	r.HandleFunc("/board/list", handlers.InsertBoardHandler(s)).Methods(http.MethodGet)
+	r.HandleFunc("/board/update/{id}", handlers.UpdateBoardHandler(s)).Methods(http.MethodPatch)
+	r.HandleFunc("/board/delete/{id}", handlers.DeleteBoardHandler(s)).Methods(http.MethodDelete)
 }

@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/JuanCManchegoH/goprisma/middleware"
-	"github.com/JuanCManchegoH/goprisma/models"
-	"github.com/JuanCManchegoH/goprisma/repository"
-	"github.com/JuanCManchegoH/goprisma/responses"
-	"github.com/JuanCManchegoH/goprisma/server"
-	"github.com/JuanCManchegoH/goprisma/structures"
+	"github.com/danielgz405/GoTaskZen/middleware"
+	"github.com/danielgz405/GoTaskZen/models"
+	"github.com/danielgz405/GoTaskZen/repository"
+	"github.com/danielgz405/GoTaskZen/responses"
+	"github.com/danielgz405/GoTaskZen/server"
+	"github.com/danielgz405/GoTaskZen/structures"
 	"github.com/golang-jwt/jwt"
 	"github.com/gorilla/mux"
 	"golang.org/x/crypto/bcrypt"
@@ -18,8 +18,6 @@ import (
 
 func SignUpHandler(s server.Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		//Token validation
-		middleware.ValidateToken(s, w, r)
 		// Handle request
 		w.Header().Set("Content-Type", "application/json")
 		var req = structures.SignUpLoginRequest{}

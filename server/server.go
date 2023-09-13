@@ -6,8 +6,8 @@ import (
 	"log"
 	"net/http"
 
-	database "github.com/JuanCManchegoH/goprisma/database"
-	repository "github.com/JuanCManchegoH/goprisma/repository"
+	database "github.com/danielgz405/GoTaskZen/database"
+	repository "github.com/danielgz405/GoTaskZen/repository"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 )
