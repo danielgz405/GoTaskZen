@@ -51,7 +51,18 @@ func BindRoutes(s server.Server, r *mux.Router) {
 	// Board routes
 	r.HandleFunc("/board", handlers.InsertBoardHandler(s)).Methods(http.MethodPost)
 	r.HandleFunc("/board/one/{id}", handlers.GetBoardByIdHandler(s)).Methods(http.MethodGet)
-	r.HandleFunc("/board/list", handlers.InsertBoardHandler(s)).Methods(http.MethodGet)
+	r.HandleFunc("/board/list", handlers.ListBoardsHandler(s)).Methods(http.MethodGet)
 	r.HandleFunc("/board/update/{id}", handlers.UpdateBoardHandler(s)).Methods(http.MethodPatch)
 	r.HandleFunc("/board/delete/{id}", handlers.DeleteBoardHandler(s)).Methods(http.MethodDelete)
+
+	//categories routes
+	r.HandleFunc("/category", handlers.InsertCategoryHandler(s)).Methods(http.MethodPost)
+	r.HandleFunc("/category/list/{boardId}", handlers.ListCategorysHandler(s)).Methods(http.MethodGet)
+	r.HandleFunc("/category/update/{id}", handlers.UpdateCategoryHandler(s)).Methods(http.MethodPatch)
+	r.HandleFunc("/category/delete/{id}", handlers.DeleteCategoryHandler(s)).Methods(http.MethodDelete)
+
+	//Task Routes
+	r.HandleFunc("/task/{categoryId}", handlers.InsertTaskHandler(s)).Methods(http.MethodPost)
+	r.HandleFunc("/task/update/{categoryId}/{id}", handlers.UpdateTaskHandler(s)).Methods(http.MethodPatch)
+	r.HandleFunc("/task/delete/{categoryId}/{id}", handlers.RemoveTaskHandler(s)).Methods(http.MethodDelete)
 }

@@ -21,6 +21,16 @@ type Repository interface {
 	ListBoards(ctx context.Context) ([]models.Board, error)
 	DeleteBoard(ctx context.Context, id string) error
 
+	//Categories
+	InsertCategory(ctx context.Context, category *models.InsertCategory) (*models.Category, error)
+	GetCategoryById(ctx context.Context, id string) (*models.Category, error)
+	AddTaskToCategory(ctx context.Context, data models.InsertTask, categoryId string) (*models.Category, error)
+	UpdateTaskToCategory(ctx context.Context, data models.UpdateTask, taskId string, categoryId string) (*models.Category, error)
+	RemoveTaskToCategory(ctx context.Context, taskId string, categoryId string) (*models.Category, error)
+	ListCategorys(ctx context.Context, boardId string) ([]models.Category, error)
+	UpdateCategory(ctx context.Context, data *models.UpdateCategory, id string) (*models.Category, error)
+	DeleteCategory(ctx context.Context, id string) error
+
 	//Close the connection
 	Close() error
 }
